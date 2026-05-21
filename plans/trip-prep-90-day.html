@@ -1,0 +1,1465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>90-Day Trip-Ready Transformation — Mass · Cut · Golf | Oakwell</title>
+<meta name="description" content="A 13-week build-then-cut transformation for anyone going from low-average fitness to peak shape for a golf-and-beach trip. Daily workouts with progressive overload, abs every week, smoothie-anchored meals, a grocery list, weekday schedule, and golf integration." />
+<meta name="keywords" content="90 day workout plan, body recomposition, golf fitness, beach body plan, muscle gain then cut, transformation program, progressive overload, smoothie recipe" />
+<link rel="canonical" href="https://example.com/plans/trip-prep-90-day.html" />
+<link rel="icon" type="image/svg+xml" href="../assets/images/oak-logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css" />
+<style>
+  /* Trip-prep-specific layout */
+  .phase-tabs {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem 0 2rem;
+  }
+  .phase-tabs button {
+    padding: .55rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(8px);
+    color: var(--ink-soft);
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+  }
+  .phase-tabs button:hover { background: rgba(135, 169, 107, .18); color: var(--forest-deep); }
+  .phase-tabs button.active {
+    background: linear-gradient(135deg, var(--forest), var(--moss));
+    color: #fff;
+    border-color: transparent;
+  }
+  .phase-panel { display: none; }
+  .phase-panel.active { display: block; }
+
+  .phase-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: .75rem;
+    margin: 1rem 0 1.5rem;
+  }
+  .phase-meta .chip {
+    padding: 1rem;
+    text-align: center;
+  }
+  .phase-meta .chip .label {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--ink-muted);
+    margin-bottom: .2rem;
+  }
+  .phase-meta .chip .value {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--forest-deep);
+    font-weight: 600;
+  }
+
+  .cal-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1rem 0 2rem;
+    font-size: .82rem;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .cal-table th, .cal-table td {
+    border: 1px solid var(--line);
+    padding: .55rem;
+    vertical-align: top;
+    text-align: left;
+  }
+  .cal-table th {
+    background: rgba(135, 169, 107, 0.22);
+    color: var(--forest-deep);
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    text-align: center;
+  }
+  .cal-table td .day-num {
+    display: block;
+    font-weight: 700;
+    color: var(--moss);
+    font-size: .72rem;
+    margin-bottom: .2rem;
+  }
+  .cal-table td .day-title {
+    display: block;
+    font-weight: 600;
+    color: var(--forest-deep);
+    font-size: .85rem;
+    margin-bottom: .15rem;
+  }
+  .cal-table td.rest .day-title { color: var(--ink-muted); }
+  .cal-table td .key-lift {
+    font-size: .75rem;
+    color: var(--ink-soft);
+  }
+  .cal-table td .activity-tag {
+    display: inline-block;
+    margin-top: .25rem;
+    font-size: .68rem;
+    background: rgba(74, 124, 89, 0.15);
+    color: var(--forest-deep);
+    padding: .1rem .4rem;
+    border-radius: 999px;
+  }
+
+  .day-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+  }
+  .day-cards .day {
+    padding: 1.1rem;
+  }
+  .day-cards .day h5 {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .75rem;
+    color: var(--moss);
+    margin-bottom: .25rem;
+  }
+  .day-cards .day h4 {
+    font-size: 1.02rem;
+    margin-bottom: .55rem;
+    color: var(--forest-deep);
+  }
+  .day-cards .day ul {
+    padding-left: 1.05rem;
+    margin: 0 0 .5rem;
+    font-size: .88rem;
+  }
+  .day-cards .day .activity {
+    margin-top: .35rem;
+    font-size: .82rem;
+    color: var(--moss);
+    font-style: italic;
+  }
+  .day-cards .day .abs-block {
+    margin-top: .55rem;
+    padding-top: .55rem;
+    border-top: 1px dashed var(--line);
+    font-size: .85rem;
+  }
+  .day-cards .day .abs-block strong { color: var(--moss); }
+
+  .meal-tabs, .grocery-tabs {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .meal-tabs button, .grocery-tabs button {
+    padding: .4rem .85rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-size: .85rem;
+    font-weight: 500;
+  }
+  .meal-tabs button.active, .grocery-tabs button.active {
+    background: linear-gradient(135deg, var(--forest), var(--moss));
+    color: #fff;
+    border-color: transparent;
+  }
+  .meal-grid, .grocery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .meal-grid .card, .grocery-grid .card {
+    padding: 1.1rem;
+  }
+  .meal-grid .card h4, .grocery-grid .card h4 {
+    font-family: var(--font-sans);
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--moss);
+    margin-bottom: .5rem;
+  }
+  .meal-grid .card ol, .grocery-grid .card ul { padding-left: 1.15rem; font-size: .9rem; margin: 0; }
+
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: .92rem;
+  }
+  .schedule-table th, .schedule-table td {
+    padding: .55rem .85rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  .schedule-table th {
+    background: rgba(135, 169, 107, 0.18);
+    color: var(--forest-deep);
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .schedule-table td:first-child {
+    font-family: var(--font-serif);
+    color: var(--moss);
+    width: 90px;
+    white-space: nowrap;
+  }
+  .schedule-table td .tag {
+    display: inline-block;
+    font-size: .7rem;
+    padding: .1rem .45rem;
+    border-radius: 999px;
+    background: rgba(74, 124, 89, 0.15);
+    color: var(--forest-deep);
+    margin-left: .35rem;
+  }
+
+  details.progress {
+    margin: 1rem 0;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--line);
+  }
+  details.progress summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--forest-deep);
+  }
+  details.progress table { margin-top: .6rem; font-size: .85rem; }
+
+  .meta-bar {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .meta-bar .badge {
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .25rem .65rem;
+    border-radius: 999px;
+    background: rgba(135, 169, 107, 0.22);
+    color: var(--forest-deep);
+  }
+
+  /* ===== Sidebar TOC layout ===== */
+  .body-grid {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .body-main { min-width: 0; }
+  .body-main > section { padding: 3rem 0; }
+  .body-main > section:first-of-type { padding-top: 1.5rem; }
+  .body-main .container {
+    max-width: none;
+    padding: 0;
+  }
+  .body-main [id] { scroll-margin-top: 80px; }
+
+  .toc-side {
+    position: sticky;
+    top: 90px;
+    padding: 1.25rem 1.35rem;
+    font-size: .92rem;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    border-radius: 14px;
+    margin-top: 3rem;
+  }
+  .toc-side h4 {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    font-size: .72rem;
+    letter-spacing: .14em;
+    color: var(--ink-muted);
+    margin-bottom: .75rem;
+  }
+  .toc-side ul, .toc-mobile ul { list-style: none; padding: 0; margin: 0; }
+  .toc-side li { margin: 0; }
+  .toc-side a {
+    display: block;
+    padding: .4rem .55rem;
+    border-radius: 8px;
+    color: var(--ink-soft);
+    border-left: 2px solid transparent;
+    text-decoration: none;
+    transition: background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .toc-side a:hover {
+    background: rgba(135, 169, 107, 0.15);
+    border-left-color: var(--moss);
+    color: var(--forest-deep);
+  }
+
+  /* ===== Mobile / phone TOC ===== */
+  .toc-mobile {
+    display: none;
+    padding: .85rem 1.1rem;
+    margin: 1.25rem 1.5rem 0;
+    border-radius: 14px;
+  }
+  .toc-mobile summary {
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--forest-deep);
+    font-size: .95rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .15rem 0;
+  }
+  .toc-mobile summary::-webkit-details-marker { display: none; }
+  .toc-mobile summary::after {
+    content: "\25BE";
+    font-size: .85rem;
+    color: var(--moss);
+    transition: transform .2s ease;
+    margin-left: .5rem;
+  }
+  .toc-mobile[open] summary::after { transform: rotate(180deg); }
+  .toc-mobile ul {
+    margin-top: .8rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .35rem;
+  }
+  .toc-mobile a {
+    display: block;
+    padding: .6rem .7rem;
+    border-radius: 10px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: .92rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--line);
+  }
+  .toc-mobile a:active {
+    background: rgba(135, 169, 107, 0.2);
+    color: var(--forest-deep);
+  }
+
+  /* Horizontally scrollable week calendar on small screens */
+  .cal-table-wrap { margin: 1rem 0 2rem; }
+  .cal-table-wrap .cal-table { margin: 0; }
+
+  @media (max-width: 1100px) {
+    .body-grid {
+      grid-template-columns: 1fr;
+      padding: 0;
+      gap: 0;
+    }
+    .body-main > section:first-of-type { padding-top: 1rem; }
+    .body-main .container {
+      max-width: var(--maxw);
+      padding: 0 1.5rem;
+      margin: 0 auto;
+    }
+    .toc-side { display: none; }
+    .toc-mobile { display: block; }
+  }
+
+  @media (max-width: 760px) {
+    .cal-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cal-table { min-width: 620px; font-size: .74rem; }
+    .cal-table th, .cal-table td { padding: .4rem .3rem; }
+    .schedule-table { font-size: .85rem; }
+    .schedule-table th, .schedule-table td { padding: .45rem .55rem; }
+    .schedule-table td:first-child { width: 70px; }
+  }
+
+  @media (max-width: 560px) {
+    .toc-mobile { margin-left: 1rem; margin-right: 1rem; }
+    .toc-mobile ul { grid-template-columns: 1fr 1fr; }
+    .phase-tabs button { font-size: .82rem; padding: .45rem .8rem; }
+    .meta-bar .badge { font-size: .66rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <a class="brand" href="../index.html"><img src="../assets/images/oak-logo.svg" alt="" width="34" height="34"><span>Oakwell</span></a>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <nav><ul class="nav-links">
+    <li><a href="../foods.html">Foods</a></li><li><a href="../workout.html">Workout</a></li><li><a href="../water.html">Water</a></li>
+    <li><a href="../sleep.html">Sleep</a></li><li><a href="../hygiene.html">Hygiene</a></li><li><a href="../air-quality.html">Air</a></li>
+    <li><a href="../carcinogens.html">Carcinogens</a></li><li><a href="../medical.html">Medical</a></li><li><a href="../skincare.html">Skin</a></li>
+    <li><a href="../plans.html">Plans</a></li>
+  </ul></nav>
+</div></header>
+
+<main>
+
+<section class="page-head"><div class="container reveal">
+  <span class="eyebrow"><a href="../plans.html" style="color:inherit;">← Plans</a> · Transformation</span>
+  <h1>90-day trip-ready transformation.</h1>
+  <p class="lede">A 13-week build-then-cut plan for someone going from low-average condition to peak shape — strong enough to swing a club well, lean enough to feel great in beachwear, rested enough to actually enjoy the trip. Daily workouts with progressive reps, abs every week, smoothie-anchored meals, a grocery list, and a weekday hour-by-hour schedule.</p>
+  <div class="meta-bar" style="margin-top:1rem;">
+    <span class="badge">3 months · 13 weeks</span>
+    <span class="badge">4 phases</span>
+    <span class="badge">Bulk → cut → peak</span>
+    <span class="badge">Golf + beach</span>
+  </div>
+</div></section>
+
+<div class="body-grid">
+<div class="body-main">
+
+<details class="toc-mobile glass-soft">
+  <summary>On this page</summary>
+  <ul>
+    <li><a href="#phases">Phases &amp; calendar</a></li>
+    <li><a href="#meals">Meals + smoothie</a></li>
+    <li><a href="#grocery">Grocery</a></li>
+    <li><a href="#schedule">Weekday schedule</a></li>
+    <li><a href="#golf">Golf &amp; activities</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+    <li><a href="#overview">How it works</a></li>
+  </ul>
+</details>
+
+<!-- =================== PHASES =================== -->
+<section><div class="container">
+  <div class="section-head reveal">
+    <span class="eyebrow">The 90 days</span>
+    <h2>Phase-by-phase workout plan</h2>
+    <p>Click a phase to see its weekly split, day-by-day calendar with progressive reps, and notes.</p>
+  </div>
+
+  <div class="phase-tabs" id="phaseTabs" role="tablist" aria-label="Phases"></div>
+  <div id="phasePanels"></div>
+</div></section>
+
+<!-- =================== SCHEDULE =================== -->
+<section><div class="container">
+  <div class="section-head reveal">
+    <span class="eyebrow">Daily rhythm</span>
+    <h2>Weekday hour-by-hour</h2>
+    <p>Anchored around a 8am–5pm workday, with the after-work block used for either a workout, a short golf trip, or a deliberate break.</p>
+  </div>
+  <div class="glass" style="padding:1.5rem;">
+    <h3 id="weekdayTitle">Standard weekday</h3>
+    <table class="schedule-table" id="weekdayTable">
+      <thead><tr><th>Time</th><th>Block</th><th>What to do</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p style="font-size:.88rem; color:var(--ink-muted); margin-top:.75rem;">After-work hours flex: putt-putt runs replace part of the break on Tue/Thu, training is 60–90 min, and there's still time for dinner and wind-down before bed.</p>
+  </div>
+</div></section>
+
+<!-- =================== MEALS =================== -->
+<section><div class="container">
+  <div class="section-head reveal">
+    <span class="eyebrow">Fuel</span>
+    <h2>Meals &amp; daily smoothie</h2>
+    <p>Cost-effective, fast, mostly whole-food meals. Calories run high in the build phases and pull back during the lean. Post-workout smoothie is every day.</p>
+  </div>
+
+  <div class="meal-tabs" id="mealTabs"></div>
+  <div id="mealPanels"></div>
+
+  <div class="glass" style="padding:1.5rem; margin-top:1.5rem;">
+    <h3>Post-workout smoothie (daily)</h3>
+    <p id="smoothieBase"></p>
+    <h4 style="margin-top:.75rem; font-family:var(--font-sans); font-size:.8rem; text-transform:uppercase; letter-spacing:.1em; color:var(--moss);">Rotate flavors</h4>
+    <ul id="smoothieVariations" class="day-plan" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); list-style:none; padding:0; gap:.6rem;"></ul>
+  </div>
+</div></section>
+
+<!-- =================== GROCERY =================== -->
+<section><div class="container">
+  <div class="section-head reveal">
+    <span class="eyebrow">Shopping</span>
+    <h2>Grocery list by phase</h2>
+    <p>Print these. Stock the kitchen on Sunday and the week takes care of itself.</p>
+  </div>
+  <div class="grocery-tabs" id="groceryTabs"></div>
+  <div id="groceryPanels"></div>
+</div></section>
+
+<!-- =================== GOLF + ACTIVITIES =================== -->
+<section><div class="container">
+  <div class="section-head reveal">
+    <span class="eyebrow">Sport</span>
+    <h2>Golf integration &amp; other activities</h2>
+    <p>No drills, no swing coach required — just consistent exposure with a little extra leading up to the tournament.</p>
+  </div>
+  <div class="glass" style="padding:1.5rem;">
+    <h3>Golf cadence</h3>
+    <ul id="golfList"></ul>
+    <h3 style="margin-top:1rem;">Other activity pool</h3>
+    <p style="font-size:.92rem; color:var(--ink-muted);">Rotate these into Saturday or weeknight slots as energy and weather allow.</p>
+    <ul id="activityList"></ul>
+  </div>
+</div></section>
+
+<!-- =================== CHECKLIST =================== -->
+<section><div class="container">
+  <article class="glass reveal">
+    <h2 id="checklist">Quick-win checklist</h2>
+    <ul class="checklist">
+      <li>One workout, every day on the calendar — half-volume counts as a win.</li>
+      <li>Add reps or a small amount of weight on the key lift every single week.</li>
+      <li>Hit your daily protein target before bedtime, every day.</li>
+      <li>Smoothie within 60 minutes of finishing a workout.</li>
+      <li>Sleep 7.5+ hours, lights out by 10:30 most weeknights.</li>
+      <li>Walk to or from putt-putt; never sit still all evening.</li>
+      <li>Bodyweight + a single waist photo, once a week, same morning, same conditions.</li>
+    </ul>
+  </article>
+</div></section>
+
+<!-- =================== HOW IT WORKS (moved to bottom for quick page scanning) =================== -->
+<section><div class="container">
+  <div class="glass" style="padding:2rem;">
+    <h2 id="overview">How this plan works</h2>
+    <p>The 90 days are split into four phases. The first two phases push your bodyweight up while building real muscle. The third phase trims the soft layer back down. The final week is a deload so you arrive rested, not wrecked. Throughout, you'll progress reps on the key lifts week by week.</p>
+    <ul>
+      <li><strong>Phase 1 — Foundation</strong> (Weeks 1–3): movement quality, base strength, surplus calories.</li>
+      <li><strong>Phase 2 — Hypertrophy Push</strong> (Weeks 4–8): five-day split, max volume, peak food intake. Most of your muscle gain happens here.</li>
+      <li><strong>Phase 3 — Lean Conversion</strong> (Weeks 9–11): mild caloric deficit, conditioning added, strength maintained.</li>
+      <li><strong>Phase 4 — Peak Taper</strong> (Weeks 12–13): pump-focused sessions, deload, sport practice, depart in peak shape.</li>
+    </ul>
+    <p>Abs are programmed into multiple sessions per week — and the reps climb every week within the phase. Skip them at your own peril.</p>
+  </div>
+</div></section>
+
+</div><!-- /.body-main -->
+
+<aside class="toc-side glass-soft">
+  <h4>On this page</h4>
+  <ul>
+    <li><a href="#phases">Phases &amp; calendar</a></li>
+    <li><a href="#meals">Meals + smoothie</a></li>
+    <li><a href="#grocery">Grocery</a></li>
+    <li><a href="#schedule">Weekday schedule</a></li>
+    <li><a href="#golf">Golf &amp; activities</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+    <li><a href="#overview">How it works</a></li>
+  </ul>
+</aside>
+
+</div><!-- /.body-grid -->
+
+</main>
+
+<footer><div class="container">
+  <div class="footer-grid">
+    <div><div class="brand" style="margin-bottom:.75rem;"><img src="../assets/images/oak-logo.svg" alt="" width="32" height="32"><span>Oakwell</span></div><p style="font-size:.92rem;">A research-backed health and wellness hub.</p></div>
+    <div><h4>Daily Habits</h4><ul><li><a href="../foods.html">Healthy Foods</a></li><li><a href="../workout.html">Working Out</a></li><li><a href="../water.html">Water</a></li><li><a href="../sleep.html">Sleep</a></li></ul></div>
+    <div><h4>Environment</h4><ul><li><a href="../hygiene.html">Hygiene</a></li><li><a href="../air-quality.html">Air Quality</a></li><li><a href="../carcinogens.html">Carcinogens</a></li></ul></div>
+    <div><h4>Care</h4><ul><li><a href="../medical.html">Medical · Dental · Vision</a></li><li><a href="../skincare.html">Skincare</a></li><li><a href="../plans.html">Plans</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© Oakwell. Educational only — not medical advice.</p></div>
+</div></footer>
+
+<!--
+  ===========================================================
+  TRIP-PREP PLAN DATA  (edit freely; the page renders from it)
+  -----------------------------------------------------------
+  Structure:
+    phases[]           one entry per phase (4 total = 90 days)
+      .name            display name
+      .weeks           number of weeks in this phase
+      .calorieGoal     short caption
+      .focus           short caption
+      .splitDays[7]    Mon..Sun template
+        .label         workout name shown in calendar
+        .type          "lift" | "active" | "sport" | "rest"
+        .keyLift       what to progress (shown in week table)
+        .exercises[]   { name, repsByWeek: ["4x6","4x7","4x8"] }
+        .abs[]         { name, repsByWeek: [...] }
+        .activity      string or null (golf/sport addition)
+        .notes         short tip
+    meals.<phaseKey>   breakfast/lunch/dinner/snack rotations
+    smoothie           base + variations
+    grocery.<phaseKey> categorized list
+    schedule.weekday   hourly schedule
+    golf, activities   simple string arrays
+  ===========================================================
+-->
+<script id="tripPlanData" type="application/json">
+{
+  "title": "90-Day Trip-Ready Transformation",
+  "phases": [
+    {
+      "id": "foundation",
+      "name": "Phase 1 — Foundation",
+      "weeks": 3,
+      "calorieGoal": "~500 kcal surplus",
+      "focus": "Learn the movements, build a base, eat big.",
+      "splitDays": [
+        {
+          "label": "Upper Strength",
+          "type": "lift",
+          "keyLift": "Bench Press",
+          "exercises": [
+            { "name": "Bench Press",            "repsByWeek": ["4x6","4x7","4x8"] },
+            { "name": "Barbell Row",            "repsByWeek": ["4x8","4x9","4x10"] },
+            { "name": "Overhead Press",         "repsByWeek": ["3x8","3x9","3x10"] },
+            { "name": "Dumbbell Curl",          "repsByWeek": ["3x10","3x11","3x12"] },
+            { "name": "Tricep Pushdown",        "repsByWeek": ["3x12","3x13","3x15"] }
+          ],
+          "abs": [
+            { "name": "Hanging Knee Raise",     "repsByWeek": ["3x10","3x12","3x14"] },
+            { "name": "Plank",                  "repsByWeek": ["3x45s","3x55s","3x65s"] }
+          ],
+          "activity": null,
+          "notes": "Choose a load that leaves 2 reps in the tank on set 1."
+        },
+        {
+          "label": "Lower Strength",
+          "type": "lift",
+          "keyLift": "Back Squat",
+          "exercises": [
+            { "name": "Back Squat",             "repsByWeek": ["4x6","4x7","4x8"] },
+            { "name": "Romanian Deadlift",      "repsByWeek": ["3x8","3x9","3x10"] },
+            { "name": "Walking Lunge",          "repsByWeek": ["3x10/leg","3x11/leg","3x12/leg"] },
+            { "name": "Standing Calf Raise",    "repsByWeek": ["3x15","3x17","3x20"] }
+          ],
+          "abs": [
+            { "name": "Cable Crunch",           "repsByWeek": ["3x12","3x14","3x16"] }
+          ],
+          "activity": null,
+          "notes": "Warm up the hips for 5 minutes before squatting."
+        },
+        {
+          "label": "Pull + Putt-Putt",
+          "type": "lift",
+          "keyLift": "Pull-up",
+          "exercises": [
+            { "name": "Pull-up (banded if needed)", "repsByWeek": ["4xAMRAP","4xAMRAP","4xAMRAP"] },
+            { "name": "Lat Pulldown",           "repsByWeek": ["3x10","3x11","3x12"] },
+            { "name": "Face Pull",              "repsByWeek": ["3x15","3x17","3x20"] },
+            { "name": "Hammer Curl",            "repsByWeek": ["3x10","3x11","3x12"] }
+          ],
+          "abs": [
+            { "name": "Russian Twist (DB)",     "repsByWeek": ["3x20","3x24","3x28"] }
+          ],
+          "activity": "Putt-putt after work (45 min)",
+          "notes": "Walk to the course if you can."
+        },
+        {
+          "label": "Mobility + Easy Cardio",
+          "type": "active",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Joint mobility flow",    "repsByWeek": ["10 min","10 min","10 min"] },
+            { "name": "Easy bike or jog",       "repsByWeek": ["30 min","35 min","40 min"] }
+          ],
+          "abs": [
+            { "name": "Dead Bug",               "repsByWeek": ["3x10","3x12","3x14"] }
+          ],
+          "activity": null,
+          "notes": "Heart rate stays conversational the entire ride."
+        },
+        {
+          "label": "Full-Body Strength",
+          "type": "lift",
+          "keyLift": "Deadlift",
+          "exercises": [
+            { "name": "Deadlift",               "repsByWeek": ["3x5","3x5","3x6"] },
+            { "name": "Incline Dumbbell Press", "repsByWeek": ["3x8","3x9","3x10"] },
+            { "name": "One-Arm DB Row",         "repsByWeek": ["3x10","3x11","3x12"] },
+            { "name": "Goblet Squat",           "repsByWeek": ["3x10","3x11","3x12"] }
+          ],
+          "abs": [
+            { "name": "Hanging Knee Raise",     "repsByWeek": ["3x12","3x14","3x16"] }
+          ],
+          "activity": null,
+          "notes": "Touch-and-go deadlifts; reset only if form breaks."
+        },
+        {
+          "label": "Sport Day",
+          "type": "sport",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Golf driving range OR pickleball OR butler park 9 holes", "repsByWeek": ["60–90 min","60–90 min","60–90 min"] }
+          ],
+          "abs": [
+            { "name": "Plank superset (front + side)", "repsByWeek": ["3x40s","3x45s","3x50s"] }
+          ],
+          "activity": "Pick the sport you'll enjoy most that day.",
+          "notes": "Movement, sunshine, low pressure. Refill the joy tank."
+        },
+        {
+          "label": "Rest + Meal Prep",
+          "type": "rest",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Long easy walk",         "repsByWeek": ["45 min","50 min","60 min"] }
+          ],
+          "abs": [],
+          "activity": null,
+          "notes": "Roast vegetables, cook a grain, batch a protein."
+        }
+      ],
+      "mealsKey": "muscle"
+    },
+    {
+      "id": "hypertrophy",
+      "name": "Phase 2 — Hypertrophy Push",
+      "weeks": 5,
+      "calorieGoal": "Peak surplus (~500–700 kcal)",
+      "focus": "Maximum quality volume. Most muscle gain happens here.",
+      "splitDays": [
+        {
+          "label": "Chest + Triceps + Abs",
+          "type": "lift",
+          "keyLift": "Bench Press",
+          "exercises": [
+            { "name": "Bench Press",            "repsByWeek": ["4x8","4x8","4x9","4x10","3x6 deload"] },
+            { "name": "Incline Dumbbell Press", "repsByWeek": ["4x10","4x10","4x11","4x12","3x8 deload"] },
+            { "name": "Cable Fly",              "repsByWeek": ["3x12","3x13","3x14","3x15","3x10 deload"] },
+            { "name": "Tricep Pushdown",        "repsByWeek": ["3x12","3x13","3x14","3x15","3x10 deload"] },
+            { "name": "Skull Crusher",          "repsByWeek": ["3x10","3x11","3x12","3x13","3x8 deload"] }
+          ],
+          "abs": [
+            { "name": "Hanging Leg Raise",      "repsByWeek": ["4x10","4x12","4x14","4x16","3x10 deload"] },
+            { "name": "Cable Crunch",           "repsByWeek": ["4x15","4x18","4x20","4x22","3x15 deload"] }
+          ],
+          "activity": null,
+          "notes": "Last set of every exercise is to 1 rep shy of failure."
+        },
+        {
+          "label": "Back + Biceps + Putt-Putt",
+          "type": "lift",
+          "keyLift": "Pull-up",
+          "exercises": [
+            { "name": "Pull-up (weighted if 10+)", "repsByWeek": ["4xAMRAP","4xAMRAP","4xAMRAP","4xAMRAP","3xAMRAP deload"] },
+            { "name": "Barbell Row",            "repsByWeek": ["4x8","4x9","4x10","4x10","3x6 deload"] },
+            { "name": "Lat Pulldown",           "repsByWeek": ["3x10","3x11","3x12","3x12","3x10 deload"] },
+            { "name": "Face Pull",              "repsByWeek": ["3x15","3x17","3x18","3x20","3x12 deload"] },
+            { "name": "Barbell Curl",           "repsByWeek": ["4x10","4x11","4x12","4x12","3x8 deload"] },
+            { "name": "Hammer Curl",            "repsByWeek": ["3x12","3x13","3x14","3x14","3x10 deload"] }
+          ],
+          "abs": [
+            { "name": "Russian Twist (DB)",     "repsByWeek": ["3x30","3x34","3x38","3x42","3x24 deload"] }
+          ],
+          "activity": "Putt-putt after work",
+          "notes": "Two finger callus check; tape if needed."
+        },
+        {
+          "label": "Legs (Heavy)",
+          "type": "lift",
+          "keyLift": "Back Squat",
+          "exercises": [
+            { "name": "Back Squat",             "repsByWeek": ["4x6","4x7","4x8","4x8","3x5 deload"] },
+            { "name": "Leg Press",              "repsByWeek": ["3x12","3x12","3x13","3x14","3x10 deload"] },
+            { "name": "Romanian Deadlift",      "repsByWeek": ["4x8","4x8","4x9","4x10","3x6 deload"] },
+            { "name": "Leg Curl",               "repsByWeek": ["3x12","3x13","3x14","3x15","3x10 deload"] },
+            { "name": "Standing Calf Raise",    "repsByWeek": ["4x15","4x17","4x18","4x20","3x12 deload"] }
+          ],
+          "abs": [
+            { "name": "Hanging Knee Raise",     "repsByWeek": ["3x14","3x16","3x18","3x20","3x12 deload"] }
+          ],
+          "activity": null,
+          "notes": "Eat a large carb meal 90 min pre-squat. Bring water + electrolytes."
+        },
+        {
+          "label": "Shoulders + Abs + Putt-Putt",
+          "type": "lift",
+          "keyLift": "Overhead Press",
+          "exercises": [
+            { "name": "Overhead Press",         "repsByWeek": ["4x6","4x7","4x8","4x8","3x5 deload"] },
+            { "name": "Dumbbell Lateral Raise", "repsByWeek": ["4x12","4x13","4x14","4x15","3x10 deload"] },
+            { "name": "Rear Delt Fly",          "repsByWeek": ["3x15","3x17","3x18","3x20","3x12 deload"] },
+            { "name": "Barbell Shrug",          "repsByWeek": ["3x12","3x13","3x14","3x15","3x10 deload"] }
+          ],
+          "abs": [
+            { "name": "Hanging Leg Raise",      "repsByWeek": ["4x12","4x14","4x16","4x18","3x10 deload"] },
+            { "name": "Plank",                  "repsByWeek": ["4x60s","4x70s","4x80s","4x90s","3x60s deload"] }
+          ],
+          "activity": "Putt-putt after work",
+          "notes": "Strict press; brace your abs before unrack."
+        },
+        {
+          "label": "Arms + Accessories",
+          "type": "lift",
+          "keyLift": "Close-Grip Bench",
+          "exercises": [
+            { "name": "Close-Grip Bench",       "repsByWeek": ["4x8","4x9","4x10","4x10","3x6 deload"] },
+            { "name": "Preacher Curl",          "repsByWeek": ["4x10","4x11","4x12","4x12","3x8 deload"] },
+            { "name": "Rope Pushdown",          "repsByWeek": ["3x12","3x13","3x14","3x15","3x10 deload"] },
+            { "name": "Incline DB Curl",        "repsByWeek": ["3x12","3x13","3x14","3x14","3x10 deload"] },
+            { "name": "Forearm Wrist Curl",     "repsByWeek": ["3x15","3x17","3x18","3x20","3x12 deload"] }
+          ],
+          "abs": [
+            { "name": "Cable Crunch",           "repsByWeek": ["4x20","4x22","4x25","4x28","3x15 deload"] }
+          ],
+          "activity": null,
+          "notes": "Arms day is fun day. Keep rest short (60–75 sec)."
+        },
+        {
+          "label": "Sport Day",
+          "type": "sport",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Top Golf OR butler park OR pickleball OR paddleboard", "repsByWeek": ["90 min","90 min","90 min","90 min","90 min"] }
+          ],
+          "abs": [
+            { "name": "Plank superset (front + side)", "repsByWeek": ["3x45s","3x50s","3x55s","3x60s","3x45s"] }
+          ],
+          "activity": "Bring water and a snack.",
+          "notes": "Bonus: walk a 9-hole instead of riding when possible."
+        },
+        {
+          "label": "Rest + Long Walk + Meal Prep",
+          "type": "rest",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Easy outdoor walk",      "repsByWeek": ["60 min","60 min","70 min","75 min","60 min"] }
+          ],
+          "abs": [],
+          "activity": null,
+          "notes": "Big breakfast, prep two proteins and a grain for the week."
+        }
+      ],
+      "mealsKey": "muscle"
+    },
+    {
+      "id": "lean",
+      "name": "Phase 3 — Lean Conversion",
+      "weeks": 3,
+      "calorieGoal": "~300–400 kcal deficit",
+      "focus": "Strip the soft layer; keep the strength you built.",
+      "splitDays": [
+        {
+          "label": "Upper (Heavy)",
+          "type": "lift",
+          "keyLift": "Bench Press",
+          "exercises": [
+            { "name": "Bench Press",            "repsByWeek": ["5x5","5x5","4x5"] },
+            { "name": "Weighted Pull-up",       "repsByWeek": ["4x6","4x6","4x6"] },
+            { "name": "Incline DB Press",       "repsByWeek": ["3x10","3x10","3x10"] },
+            { "name": "Barbell Row",            "repsByWeek": ["3x10","3x10","3x8"] },
+            { "name": "Lateral Raise",          "repsByWeek": ["3x12","3x14","3x15"] },
+            { "name": "Tricep Rope Pushdown",   "repsByWeek": ["3x12","3x14","3x15"] },
+            { "name": "EZ-Bar Curl",            "repsByWeek": ["3x12","3x14","3x15"] }
+          ],
+          "abs": [
+            { "name": "Plank",                  "repsByWeek": ["3x75s","3x90s","3x100s"] }
+          ],
+          "activity": null,
+          "notes": "Strength stays. Don't chase the pump — chase the bar."
+        },
+        {
+          "label": "HIIT + Abs + Putt-Putt",
+          "type": "active",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Warm-up bike",           "repsByWeek": ["5 min","5 min","5 min"] },
+            { "name": "Sprints (bike/treadmill)", "repsByWeek": ["8 x 30s on / 90s off","9 x 30s on / 90s off","10 x 30s on / 90s off"] }
+          ],
+          "abs": [
+            { "name": "Hanging Leg Raise",      "repsByWeek": ["4x12","4x14","4x16"] },
+            { "name": "Cable Crunch",           "repsByWeek": ["4x20","4x22","4x25"] },
+            { "name": "Russian Twist",          "repsByWeek": ["4x40","4x44","4x48"] }
+          ],
+          "activity": "Putt-putt after work",
+          "notes": "Sprints should leave you genuinely gassed at the end of each."
+        },
+        {
+          "label": "Lower (Heavy)",
+          "type": "lift",
+          "keyLift": "Back Squat",
+          "exercises": [
+            { "name": "Back Squat",             "repsByWeek": ["5x5","5x5","4x5"] },
+            { "name": "Romanian Deadlift",      "repsByWeek": ["4x6","4x6","4x6"] },
+            { "name": "Walking Lunge",          "repsByWeek": ["3x12/leg","3x12/leg","3x10/leg"] },
+            { "name": "Leg Curl",               "repsByWeek": ["3x12","3x14","3x15"] },
+            { "name": "Standing Calf Raise",    "repsByWeek": ["4x15","4x17","4x20"] }
+          ],
+          "abs": [
+            { "name": "Hanging Knee Raise",     "repsByWeek": ["4x15","4x17","4x20"] }
+          ],
+          "activity": null,
+          "notes": "Hold reps. Strength preserved = look preserved."
+        },
+        {
+          "label": "Conditioning + Bag Work",
+          "type": "active",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Easy jog warm-up",       "repsByWeek": ["10 min","10 min","10 min"] },
+            { "name": "Punching bag rounds",    "repsByWeek": ["5 x 3 min / 1 min rest","6 x 3 min / 1 min rest","6 x 3 min / 1 min rest"] },
+            { "name": "Cool-down walk",         "repsByWeek": ["15 min","15 min","15 min"] }
+          ],
+          "abs": [
+            { "name": "Plank",                  "repsByWeek": ["3x80s","3x90s","3x100s"] }
+          ],
+          "activity": null,
+          "notes": "Mix straight punches and combos. Tape your wrists."
+        },
+        {
+          "label": "Push/Pull Mix",
+          "type": "lift",
+          "keyLift": "Overhead Press",
+          "exercises": [
+            { "name": "Overhead Press",         "repsByWeek": ["4x6","4x6","4x6"] },
+            { "name": "Barbell Row",            "repsByWeek": ["4x8","4x8","4x8"] },
+            { "name": "Incline DB Press",       "repsByWeek": ["3x10","3x10","3x10"] },
+            { "name": "Lat Pulldown",           "repsByWeek": ["3x10","3x10","3x10"] },
+            { "name": "DB Curl",                "repsByWeek": ["3x10","3x10","3x10"] },
+            { "name": "Tricep Pushdown",        "repsByWeek": ["3x10","3x10","3x10"] }
+          ],
+          "abs": [
+            { "name": "Cable Crunch",           "repsByWeek": ["4x20","4x22","4x25"] }
+          ],
+          "activity": null,
+          "notes": "Quick session. In and out in 50 minutes."
+        },
+        {
+          "label": "Long Sport Day",
+          "type": "sport",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Golf 9 holes (walking) OR pickleball league OR paddleboard", "repsByWeek": ["90–120 min","90–120 min","90–120 min"] }
+          ],
+          "abs": [
+            { "name": "Plank superset",         "repsByWeek": ["3x60s","3x70s","3x80s"] }
+          ],
+          "activity": "Paddleboard option ideal if it's warm.",
+          "notes": "Bring sunscreen. Refer to skincare page."
+        },
+        {
+          "label": "Long Walk + Recovery",
+          "type": "rest",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Outdoor walk",           "repsByWeek": ["75 min","80 min","90 min"] }
+          ],
+          "abs": [],
+          "activity": null,
+          "notes": "Cook for the week. Hydrate."
+        }
+      ],
+      "mealsKey": "lean"
+    },
+    {
+      "id": "peak",
+      "name": "Phase 4 — Peak Taper",
+      "weeks": 2,
+      "calorieGoal": "Maintenance, slightly higher carbs",
+      "focus": "Refresh the body, sharpen the swing, depart in peak shape.",
+      "splitDays": [
+        {
+          "label": "Upper Pump (Light)",
+          "type": "lift",
+          "keyLift": "Bench Press",
+          "exercises": [
+            { "name": "Bench Press (light)",    "repsByWeek": ["3x12","3x10"] },
+            { "name": "DB Row",                 "repsByWeek": ["3x12","3x10"] },
+            { "name": "Incline DB Press",       "repsByWeek": ["3x12","3x10"] },
+            { "name": "Lateral Raise",          "repsByWeek": ["3x15","3x12"] },
+            { "name": "Cable Curl",             "repsByWeek": ["3x15","3x12"] },
+            { "name": "Tricep Pushdown",        "repsByWeek": ["3x15","3x12"] }
+          ],
+          "abs": [
+            { "name": "Cable Crunch",           "repsByWeek": ["3x20","3x15"] }
+          ],
+          "activity": null,
+          "notes": "Stay 2–3 reps shy of failure. We're tapering."
+        },
+        {
+          "label": "Lower Pump (Light)",
+          "type": "lift",
+          "keyLift": "Goblet Squat",
+          "exercises": [
+            { "name": "Goblet Squat",           "repsByWeek": ["3x12","3x10"] },
+            { "name": "Romanian Deadlift",      "repsByWeek": ["3x10","3x8"] },
+            { "name": "Walking Lunge",          "repsByWeek": ["3x10/leg","3x8/leg"] },
+            { "name": "Standing Calf Raise",    "repsByWeek": ["3x15","3x12"] }
+          ],
+          "abs": [
+            { "name": "Plank",                  "repsByWeek": ["3x60s","3x45s"] }
+          ],
+          "activity": null,
+          "notes": "Smooth and easy. No grinding reps."
+        },
+        {
+          "label": "Abs + Putt-Putt + Skin",
+          "type": "active",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Easy bike",              "repsByWeek": ["20 min","20 min"] }
+          ],
+          "abs": [
+            { "name": "Hanging Knee Raise",     "repsByWeek": ["3x12","3x10"] },
+            { "name": "Cable Crunch",           "repsByWeek": ["3x18","3x15"] },
+            { "name": "Plank",                  "repsByWeek": ["3x60s","3x45s"] }
+          ],
+          "activity": "Putt-putt after work; SPF + book a facial",
+          "notes": "Tan a little, don't burn. Hydrate aggressively."
+        },
+        {
+          "label": "Full-Body Light + Mobility",
+          "type": "lift",
+          "keyLift": "Deadlift",
+          "exercises": [
+            { "name": "Deadlift (light)",       "repsByWeek": ["2x5","2x3"] },
+            { "name": "DB Bench",               "repsByWeek": ["3x10","3x8"] },
+            { "name": "DB Row",                 "repsByWeek": ["3x10","3x8"] },
+            { "name": "Mobility flow",          "repsByWeek": ["15 min","15 min"] }
+          ],
+          "abs": [
+            { "name": "Dead Bug",               "repsByWeek": ["3x10","3x8"] }
+          ],
+          "activity": null,
+          "notes": "Leave the gym feeling better than you came in."
+        },
+        {
+          "label": "Rest or Easy Walk",
+          "type": "rest",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Easy walk",              "repsByWeek": ["30 min","20 min"] }
+          ],
+          "abs": [],
+          "activity": null,
+          "notes": "Pack a little. Plan rest of the trip."
+        },
+        {
+          "label": "Practice Round or Activity",
+          "type": "sport",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Golf practice round OR pickleball (chill pace)", "repsByWeek": ["90 min","60 min"] }
+          ],
+          "abs": [],
+          "activity": "No tournament-grade exertion.",
+          "notes": "Loose grip. Tee high. Trust the work."
+        },
+        {
+          "label": "Rest",
+          "type": "rest",
+          "keyLift": "—",
+          "exercises": [
+            { "name": "Nothing planned; nap if needed", "repsByWeek": ["—","—"] }
+          ],
+          "abs": [],
+          "activity": null,
+          "notes": "Eat well, sleep early."
+        }
+      ],
+      "mealsKey": "lean"
+    }
+  ],
+
+  "meals": {
+    "muscle": {
+      "label": "Bulk phases (Foundation + Hypertrophy)",
+      "breakfast": [
+        "3 eggs + 2 slices sourdough + avocado + fruit",
+        "Greek yogurt + oats + berries + honey + walnuts",
+        "Breakfast burrito (eggs, beans, salsa, cheese, whole-wheat tortilla)",
+        "Overnight oats + chia + peanut butter + banana",
+        "Omelet (3 eggs + spinach + cheese) + sweet potato hash",
+        "Cottage cheese + pineapple + granola",
+        "Protein pancakes + maple syrup + side of eggs"
+      ],
+      "lunch": [
+        "Chicken + jasmine rice + broccoli bowl (sheet-pan style)",
+        "Ground beef + sweet potato + sautéed greens",
+        "Tuna pasta salad (whole-grain pasta, olive oil, peas)",
+        "Turkey + rice bowl with avocado and salsa",
+        "Salmon + quinoa + roasted veg",
+        "Big chicken burrito bowl with rice and beans",
+        "Leftover dinner + side salad"
+      ],
+      "dinner": [
+        "Steak + baked potato + side salad",
+        "Ground turkey tacos (corn tortillas, lettuce, cheese, salsa)",
+        "Sheet-pan chicken thighs + potatoes + asparagus",
+        "Homemade pizza on whole-grain dough + veg-loaded",
+        "Salmon + rice + roasted broccoli",
+        "Spaghetti bolognese with extra-lean ground beef + side salad",
+        "Stir-fry (beef or chicken) + jasmine rice + bok choy"
+      ],
+      "snacks": [
+        "Greek yogurt + honey + nuts",
+        "Apple + peanut butter",
+        "Beef jerky + handful of cashews",
+        "Cottage cheese + berries",
+        "Whole-grain toast + almond butter + banana",
+        "Hard-boiled eggs + fruit",
+        "Trail mix + chocolate milk"
+      ]
+    },
+    "lean": {
+      "label": "Lean phases (Conversion + Peak)",
+      "breakfast": [
+        "3 eggs + 1 slice sourdough + fruit",
+        "Greek yogurt + berries + small handful granola",
+        "Veggie omelet (3 eggs + spinach + tomato)",
+        "Overnight oats (smaller portion) + berries + chia",
+        "Cottage cheese + pineapple",
+        "Egg-white scramble + avocado toast (1 slice)",
+        "Smoked salmon + cucumber + cream cheese on rye"
+      ],
+      "lunch": [
+        "Grilled chicken big salad + olive oil + lemon",
+        "Tuna + greens + chickpeas + balsamic",
+        "Turkey lettuce wraps + side of fruit",
+        "Chicken + roasted sweet potato + greens",
+        "Salmon + cauliflower rice + asparagus",
+        "Beef + veggie stir-fry + small rice",
+        "Leftover dinner + extra greens"
+      ],
+      "dinner": [
+        "Grilled chicken + roasted veg medley + small rice",
+        "Salmon + asparagus + sweet potato",
+        "Lean ground turkey + zucchini + tomato sauce + side salad",
+        "Shrimp stir-fry + jasmine rice + broccoli",
+        "Steak (lean cut) + big salad + small potato",
+        "White-fish tacos in lettuce wraps + slaw",
+        "Chicken fajitas (peppers + onions) + 1 tortilla"
+      ],
+      "snacks": [
+        "Greek yogurt + berries",
+        "Apple + small handful almonds",
+        "Beef jerky",
+        "Cottage cheese + cucumber slices",
+        "Hard-boiled eggs",
+        "Edamame",
+        "Plain popcorn + a square of dark chocolate"
+      ]
+    }
+  },
+
+  "smoothie": {
+    "base": "Daily post-workout — blend: 1 cup whole milk (or oat), 1 scoop whey, 1 banana, ½ cup berries, ½ cup oats, 1 Tbsp peanut butter, ice. ~500 kcal in the bulk phase; halve the oats + peanut butter in the lean phase (~350 kcal).",
+    "variations": [
+      "Chocolate-PB — chocolate whey + extra Tbsp PB + small handful spinach",
+      "Berry-Vanilla — vanilla whey + mixed frozen berries + Greek yogurt",
+      "Tropical — vanilla whey + frozen pineapple + mango + coconut milk",
+      "Green Recovery — vanilla whey + spinach + frozen banana + chia",
+      "Mocha — chocolate whey + cold brew shot + banana + cocoa nibs",
+      "Cherry-Almond — vanilla whey + frozen cherries + almond butter",
+      "Strawberry-Cheesecake — vanilla whey + frozen strawberries + cottage cheese"
+    ]
+  },
+
+  "grocery": {
+    "muscle": {
+      "label": "Bulk-phase shopping",
+      "categories": {
+        "Produce": ["Bananas (lots)","Berries (frozen + fresh)","Spinach + spring mix","Broccoli","Sweet potatoes","Regular potatoes","Bell peppers","Onions, garlic, ginger","Lemons, limes","Avocados","Apples"],
+        "Proteins": ["Chicken thighs","Ground beef (85/15)","Ground turkey","Steak (sirloin or flank)","Salmon fillets","Eggs (2 dozen)","Greek yogurt (full fat)","Cottage cheese","Whey protein powder","Beef jerky","Canned tuna"],
+        "Carbs & grains": ["Jasmine or brown rice","Rolled oats","Sourdough bread","Whole-grain pasta","Whole-grain tortillas","Corn tortillas","Pizza dough","Quinoa"],
+        "Fats & dairy": ["Whole milk","Olive oil + avocado oil","Peanut butter","Almond butter","Mixed nuts (cashews, almonds, walnuts)","Chia + flax seeds","Cheese (cheddar / mozzarella)","Butter"],
+        "Pantry & flavor": ["Sea salt, pepper","Paprika, cumin, oregano, garlic powder","Soy sauce or tamari","Salsa","Honey + maple syrup","Canned beans (black + pinto)","Marinara","Olive-oil mayo"]
+      }
+    },
+    "lean": {
+      "label": "Lean-phase shopping",
+      "categories": {
+        "Produce": ["Spinach + arugula + mixed greens","Cucumber, bell peppers, tomatoes","Broccoli, asparagus, zucchini","Cauliflower (incl. riced)","Sweet potatoes (smaller portions)","Lemons, limes","Avocados","Berries","Apples","Pineapple"],
+        "Proteins": ["Chicken breast + thighs","Lean ground turkey (93/7)","Lean steak (sirloin)","Salmon","White fish (cod/tilapia)","Shrimp","Eggs + egg whites","Greek yogurt (2% or 0%)","Cottage cheese","Whey protein","Beef jerky"],
+        "Carbs & grains": ["Jasmine rice (smaller portions)","Rolled oats","Sourdough (1 loaf)","Corn tortillas","Quinoa","Lettuce wraps"],
+        "Fats & dairy": ["Oat milk or skim","Olive oil","Avocado","Nuts (almonds — measure portions)","Chia + flax","Hummus","Cottage cheese"],
+        "Pantry & flavor": ["Sea salt, pepper","Spice mixes","Hot sauce + salsa","Mustard, vinegar","Soy sauce","Canned tuna","Edamame","Dark chocolate (small treat)"]
+      }
+    }
+  },
+
+  "schedule": {
+    "weekday": [
+      { "time": "6:30 AM",  "block": "Wake",       "task": "Light, water (16 oz), no phone for 15 min" },
+      { "time": "6:45 AM",  "block": "Morning",    "task": "Quick breakfast OR coffee + protein shake; quick shower" },
+      { "time": "7:30 AM",  "block": "Commute",    "task": "Pack lunch + snacks if not packed last night" },
+      { "time": "8:00 AM",  "block": "Work",       "task": "Deep work block 1 (most demanding task first)" },
+      { "time": "10:00 AM", "block": "Snack",      "task": "Snack 1 (Greek yogurt or jerky + fruit)" },
+      { "time": "12:00 PM", "block": "Lunch",      "task": "Lunch + 10-min walk if possible" },
+      { "time": "1:00 PM",  "block": "Work",       "task": "Deep work block 2" },
+      { "time": "2:30 PM",  "block": "Snack",      "task": "Snack 2 (nuts, protein bar, fruit)" },
+      { "time": "3:00 PM",  "block": "Work",       "task": "Meetings / lighter work; stand and stretch 2 min hourly" },
+      { "time": "5:00 PM",  "block": "Off work",   "task": "Leave; change; 16 oz water" },
+      { "time": "5:15 PM",  "block": "Break",      "task": "Decompression: short walk, music, no email. (Tue/Thu: leave for putt-putt instead)" },
+      { "time": "5:45 PM",  "block": "Pre-workout","task": "Small carb + caffeine: banana + coffee or rice cakes" },
+      { "time": "6:00 PM",  "block": "Workout",    "task": "60–90 min lift per phase plan" },
+      { "time": "7:30 PM",  "block": "Smoothie",   "task": "Post-workout smoothie immediately after" },
+      { "time": "7:45 PM",  "block": "Shower",     "task": "Cool-warm shower; skincare basics (cleanse + moisturize + SPF tomorrow)" },
+      { "time": "8:15 PM",  "block": "Dinner",     "task": "Phase-appropriate dinner; sit at table, no screens" },
+      { "time": "9:00 PM",  "block": "Wind-down",  "task": "Optional: golf videos, light reading, stretch, prep tomorrow's lunch" },
+      { "time": "10:00 PM", "block": "Dim",        "task": "Dim lights; phone in another room" },
+      { "time": "10:30 PM", "block": "Sleep",      "task": "Lights out (target 7.5–8 hr)" }
+    ]
+  },
+
+  "golf": [
+    "Putt-putt 1–3 evenings per week (Tue/Thu standard, occasional Fri)",
+    "Top Golf 1–2× per month — primarily on Sport Day (Saturday)",
+    "Butler Park 9 holes when the weekend allows — walking, no cart",
+    "Frequency increases in the final 4 weeks: weekend round + 1 weeknight short session",
+    "Practice round in Peak phase replaces the heavy Friday workout"
+  ],
+
+  "activities": [
+    "Pickleball (1 hr) — great Saturday alternative or weeknight social",
+    "Bike ride (zone 2, 30–60 min) — recovery day swap",
+    "Run (easy 30 min) — recovery day swap; build up gradually",
+    "Punching bag (programmed in Lean phase Thursdays) — also fine as ad-hoc cardio",
+    "Paddleboard (60–90 min) — June/July weekends, low joint cost, big core demand",
+    "Long outdoor walk (60+ min) — Sunday default"
+  ]
+}
+</script>
+
+<script>
+(function () {
+  const d = JSON.parse(document.getElementById('tripPlanData').textContent);
+  const DOW = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+  /* ---------------- PHASES + CALENDAR ---------------- */
+  const tabs = document.getElementById('phaseTabs');
+  const panels = document.getElementById('phasePanels');
+  let activePhase = 0;
+  let dayCounter = 1;
+  // Pre-compute starting day number for each phase
+  const phaseStarts = [];
+  let acc = 1;
+  d.phases.forEach(p => { phaseStarts.push(acc); acc += p.weeks * 7; });
+
+  d.phases.forEach((phase, pIdx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = phase.name;
+    btn.dataset.phase = pIdx;
+    if (pIdx === 0) btn.classList.add('active');
+    btn.addEventListener('click', () => {
+      activePhase = pIdx;
+      [...tabs.children].forEach(b => b.classList.toggle('active', +b.dataset.phase === pIdx));
+      [...panels.children].forEach(p => p.classList.toggle('active', +p.dataset.phase === pIdx));
+    });
+    tabs.appendChild(btn);
+
+    const panel = document.createElement('div');
+    panel.className = 'phase-panel glass' + (pIdx === 0 ? ' active' : '');
+    panel.dataset.phase = pIdx;
+    panel.style.padding = '2rem';
+    panel.id = pIdx === 0 ? 'phases' : '';
+
+    // Phase header
+    panel.innerHTML = `
+      <h3 style="font-family:var(--font-serif); color:var(--forest-deep); margin-bottom:.4rem;">${phase.name}</h3>
+      <p style="color:var(--ink-soft);">${phase.focus}</p>
+      <div class="phase-meta">
+        <div class="chip glass-soft"><div class="label">Weeks</div><div class="value">${phase.weeks}</div></div>
+        <div class="chip glass-soft"><div class="label">Days</div><div class="value">${phaseStarts[pIdx]}–${phaseStarts[pIdx] + phase.weeks * 7 - 1}</div></div>
+        <div class="chip glass-soft"><div class="label">Calories</div><div class="value">${phase.calorieGoal}</div></div>
+        <div class="chip glass-soft"><div class="label">Meals</div><div class="value">${d.meals[phase.mealsKey].label.split(' (')[0]}</div></div>
+      </div>
+      <h4 style="margin-top:1rem; font-family:var(--font-sans); font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; color:var(--moss);">7-day split (template)</h4>
+    `;
+
+    // Day-template cards
+    const cards = document.createElement('div');
+    cards.className = 'day-cards';
+    phase.splitDays.forEach((day, dIdx) => {
+      const c = document.createElement('div');
+      c.className = 'day glass-soft';
+      const exerciseList = day.exercises.map(ex =>
+        `<li><strong>${ex.name}</strong> — ${ex.repsByWeek[0]}</li>`
+      ).join('');
+      const absList = day.abs && day.abs.length
+        ? `<div class="abs-block"><strong>Abs:</strong><ul>${day.abs.map(a => `<li>${a.name} — ${a.repsByWeek[0]}</li>`).join('')}</ul></div>`
+        : '';
+      c.innerHTML = `
+        <h5>${DOW[dIdx]} · ${day.type}</h5>
+        <h4>${day.label}</h4>
+        <ul>${exerciseList}</ul>
+        ${absList}
+        ${day.activity ? `<div class="activity">→ ${day.activity}</div>` : ''}
+        ${day.notes ? `<div class="activity" style="color:var(--ink-muted); font-style:normal;">Note: ${day.notes}</div>` : ''}
+      `;
+      cards.appendChild(c);
+    });
+    panel.appendChild(cards);
+
+    // Calendar table (rows = weeks of this phase, cols = days)
+    panel.insertAdjacentHTML('beforeend',
+      `<h4 style="margin-top:1.5rem; font-family:var(--font-sans); font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; color:var(--moss);">Week-by-week calendar (with progressed reps on key lift)</h4>`
+    );
+    const tbl = document.createElement('table');
+    tbl.className = 'cal-table';
+    let header = '<thead><tr><th>Week</th>' + DOW.map(d => `<th>${d}</th>`).join('') + '</tr></thead>';
+    let body = '<tbody>';
+    for (let w = 0; w < phase.weeks; w++) {
+      body += `<tr><th>W${w+1}</th>`;
+      phase.splitDays.forEach((day, dIdx) => {
+        const overallDay = phaseStarts[pIdx] + (w * 7) + dIdx;
+        const restCls = day.type === 'rest' ? 'rest' : '';
+        // Find this week's progressed key-lift reps (or first exercise reps)
+        let keyReps = '';
+        if (day.type === 'lift' && day.exercises.length) {
+          const main = day.exercises.find(ex => ex.name.toLowerCase().startsWith((day.keyLift||'').toLowerCase())) || day.exercises[0];
+          keyReps = `<span class="key-lift">${main.name.split(' ').slice(0,3).join(' ')}: ${main.repsByWeek[Math.min(w, main.repsByWeek.length - 1)]}</span>`;
+        } else if (day.exercises.length) {
+          keyReps = `<span class="key-lift">${day.exercises[0].repsByWeek[Math.min(w, day.exercises[0].repsByWeek.length - 1)]}</span>`;
+        }
+        const tag = day.activity ? `<span class="activity-tag">+ activity</span>` : '';
+        body += `<td class="${restCls}">
+            <span class="day-num">Day ${overallDay}</span>
+            <span class="day-title">${day.label}</span>
+            ${keyReps}
+            ${tag}
+          </td>`;
+      });
+      body += '</tr>';
+    }
+    body += '</tbody>';
+    tbl.innerHTML = header + body;
+    const tblWrap = document.createElement('div');
+    tblWrap.className = 'cal-table-wrap';
+    tblWrap.appendChild(tbl);
+    panel.appendChild(tblWrap);
+
+    // Collapsible progression detail (per exercise)
+    const det = document.createElement('details');
+    det.className = 'progress';
+    let progRows = '';
+    phase.splitDays.forEach((day, dIdx) => {
+      if (!day.exercises.length) return;
+      day.exercises.concat(day.abs || []).forEach(ex => {
+        progRows += `<tr><td>${DOW[dIdx]}</td><td>${ex.name}</td>` +
+          ex.repsByWeek.map(r => `<td>${r}</td>`).join('') + '</tr>';
+      });
+    });
+    let progHead = '<tr><th>Day</th><th>Exercise</th>' + Array.from({length: phase.weeks}, (_,i)=>`<th>W${i+1}</th>`).join('') + '</tr>';
+    det.innerHTML = `<summary>Show full week-by-week progression table (every exercise, every week)</summary>
+      <table><thead>${progHead}</thead><tbody>${progRows}</tbody></table>`;
+    panel.appendChild(det);
+
+    panels.appendChild(panel);
+  });
+
+  /* ---------------- MEALS ---------------- */
+  const mealTabs = document.getElementById('mealTabs');
+  const mealPanels = document.getElementById('mealPanels');
+  Object.entries(d.meals).forEach(([key, m], i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = m.label; b.dataset.key = key;
+    if (i === 0) b.classList.add('active');
+    b.addEventListener('click', () => {
+      [...mealTabs.children].forEach(x => x.classList.toggle('active', x.dataset.key === key));
+      [...mealPanels.children].forEach(x => x.classList.toggle('active', x.dataset.key === key));
+    });
+    mealTabs.appendChild(b);
+
+    const panel = document.createElement('div');
+    panel.className = 'phase-panel' + (i === 0 ? ' active' : '');
+    panel.dataset.key = key;
+    panel.id = i === 0 ? 'meals' : '';
+    const grid = document.createElement('div');
+    grid.className = 'meal-grid';
+    ['breakfast','lunch','dinner','snacks'].forEach(cat => {
+      const card = document.createElement('div');
+      card.className = 'card glass-soft';
+      card.innerHTML = `<h4>${cat}</h4><ol>${m[cat].map(x => `<li>${x}</li>`).join('')}</ol>`;
+      grid.appendChild(card);
+    });
+    panel.appendChild(grid);
+    mealPanels.appendChild(panel);
+  });
+
+  document.getElementById('smoothieBase').textContent = d.smoothie.base;
+  d.smoothie.variations.forEach(v => {
+    const li = document.createElement('li');
+    li.className = 'glass-soft';
+    li.style.padding = '.65rem .85rem';
+    li.style.borderRadius = '10px';
+    li.style.fontSize = '.9rem';
+    li.textContent = v;
+    document.getElementById('smoothieVariations').appendChild(li);
+  });
+
+  /* ---------------- GROCERY ---------------- */
+  const gTabs = document.getElementById('groceryTabs');
+  const gPanels = document.getElementById('groceryPanels');
+  Object.entries(d.grocery).forEach(([key, g], i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = g.label; b.dataset.key = key;
+    if (i === 0) b.classList.add('active');
+    b.addEventListener('click', () => {
+      [...gTabs.children].forEach(x => x.classList.toggle('active', x.dataset.key === key));
+      [...gPanels.children].forEach(x => x.classList.toggle('active', x.dataset.key === key));
+    });
+    gTabs.appendChild(b);
+
+    const panel = document.createElement('div');
+    panel.className = 'phase-panel' + (i === 0 ? ' active' : '');
+    panel.dataset.key = key;
+    panel.id = i === 0 ? 'grocery' : '';
+    const grid = document.createElement('div');
+    grid.className = 'grocery-grid';
+    Object.entries(g.categories).forEach(([cat, items]) => {
+      const card = document.createElement('div');
+      card.className = 'card glass-soft';
+      card.innerHTML = `<h4>${cat}</h4><ul>${items.map(x => `<li>${x}</li>`).join('')}</ul>`;
+      grid.appendChild(card);
+    });
+    panel.appendChild(grid);
+    gPanels.appendChild(panel);
+  });
+
+  /* ---------------- SCHEDULE ---------------- */
+  const schedBody = document.querySelector('#weekdayTable tbody');
+  d.schedule.weekday.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${row.time}</td><td><strong>${row.block}</strong></td><td>${row.task}</td>`;
+    schedBody.appendChild(tr);
+  });
+  document.getElementById('weekdayTable').parentElement.parentElement.id = 'schedule';
+
+  /* ---------------- GOLF + ACTIVITIES ---------------- */
+  d.golf.forEach(item => {
+    const li = document.createElement('li'); li.textContent = item;
+    document.getElementById('golfList').appendChild(li);
+  });
+  d.activities.forEach(item => {
+    const li = document.createElement('li'); li.textContent = item;
+    document.getElementById('activityList').appendChild(li);
+  });
+  document.getElementById('golfList').parentElement.parentElement.id = 'golf';
+})();
+</script>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
