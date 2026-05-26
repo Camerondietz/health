@@ -144,6 +144,7 @@ section { padding: 4rem 0; }
   padding: .5rem .65rem;
   cursor: pointer;
   color: var(--forest-deep);
+  justify-items: end;
 }
 
 @media (max-width: 900px) {

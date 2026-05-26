@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Stretches — Mobility, Morning Routines &amp; Recovery | Oakwell</title>
+<meta name="description" content="A filterable library of stretches for mobility, recovery, desk relief and post-workout cooldowns — plus ready-to-go sets including a 5-minute morning stretch routine." />
+<meta name="keywords" content="stretches, morning stretch, mobility, flexibility, desk stretches, post-workout cooldown, bedtime stretches" />
+<link rel="canonical" href="https://example.com/stretches.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Stretches — A Filterable Library + Routines">
+<meta property="og:description" content="Search and filter stretches, then follow ready-made sets for mornings, desk breaks, and after workouts.">
+<meta property="og:image" content="assets/images/oak-logo.svg" />
+<link rel="icon" type="image/svg+xml" href="assets/images/oak-logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css" />
+<style>
+  /* Stretches-specific */
+  .filter-bar {
+    display: flex; flex-wrap: wrap; gap: .5rem;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+  .filter-bar .search {
+    flex: 1 1 220px;
+    min-width: 200px;
+    padding: .65rem .9rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.7);
+    font-family: inherit;
+    font-size: .95rem;
+    color: var(--ink);
+    outline: none;
+  }
+  .filter-bar .search:focus { border-color: var(--moss); box-shadow: 0 0 0 3px rgba(135,169,107,.2); }
+  .chip {
+    display: inline-flex; align-items: center;
+    padding: .45rem .85rem;
+    border-radius: 999px;
+    font-size: .85rem; font-weight: 600;
+    color: var(--ink-soft);
+    background: rgba(255,255,255,.6);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .chip:hover { background: rgba(135,169,107,.18); color: var(--forest-deep); }
+  .chip.active {
+    background: linear-gradient(135deg, var(--forest), var(--moss));
+    color: #fff; border-color: transparent;
+  }
+  .stretch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.1rem;
+  }
+  .stretch-card {
+    padding: 0;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .stretch-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .stretch-card .figure {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, rgba(184,211,163,.55), rgba(135,169,107,.30));
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+  }
+  .stretch-card .figure svg { width: 70%; height: 70%; color: var(--forest-deep); }
+  .stretch-card .body { padding: 1rem 1.1rem 1.2rem; }
+  .stretch-card h3 { font-size: 1.1rem; margin-bottom: .3rem; }
+  .stretch-card p { font-size: .9rem; margin: 0 0 .65rem; color: var(--ink-muted); }
+  .stretch-card .meta {
+    display: flex; flex-wrap: wrap; gap: .35rem;
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--moss); font-weight: 700;
+  }
+  .stretch-card .meta span {
+    background: rgba(135,169,107,.18);
+    padding: .2rem .55rem; border-radius: 999px;
+    color: var(--forest-deep);
+  }
+  .stretch-card .duration {
+    margin-top: .65rem; font-size: .85rem; color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .empty-msg {
+    grid-column: 1 / -1;
+    text-align: center; padding: 2rem; color: var(--ink-muted);
+    font-style: italic;
+  }
+  /* Routine sets */
+  .routines {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .routine { padding: 1.6rem 1.5rem; display: flex; flex-direction: column; }
+  .routine .badge {
+    align-self: flex-start;
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    font-size: .72rem; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, var(--forest), var(--moss));
+    margin-bottom: .8rem;
+  }
+  .routine.featured-routine {
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.78), rgba(184,211,163,.4)),
+      radial-gradient(600px 300px at 90% 10%, rgba(135,169,107,.45), transparent 60%);
+  }
+  .routine h3 { margin-bottom: .35rem; }
+  .routine .summary { font-size: .92rem; color: var(--ink-muted); margin-bottom: 1rem; }
+  .routine ol { padding-left: 1.2rem; margin: 0; font-size: .94rem; }
+  .routine ol li { margin-bottom: .45rem; }
+  .routine ol li strong { color: var(--forest-deep); }
+  .routine .total {
+    margin-top: 1rem; padding-top: .9rem;
+    border-top: 1px solid var(--line);
+    font-size: .85rem; color: var(--ink-muted);
+  }
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <a class="brand" href="index.html"><img src="assets/images/oak-logo.svg" alt="" width="34" height="34"><span>Oakwell</span></a>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  <nav><ul class="nav-links">
+    <li><a href="foods.html">Foods</a></li><li><a href="workout.html">Workout</a></li><li><a href="stretches.html">Stretches</a></li><li><a href="water.html">Water</a></li>
+    <li><a href="sleep.html">Sleep</a></li><li><a href="hygiene.html">Hygiene</a></li><li><a href="air-quality.html">Air</a></li>
+    <li><a href="carcinogens.html">Carcinogens</a></li><li><a href="medical.html">Medical</a></li><li><a href="skincare.html">Skin</a></li>
+    <li><a href="plans.html">Plans</a></li>
+  </ul></nav>
+</div></header>
+
+<!-- Reusable SVG icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Head + body base used in figures -->
+    <symbol id="fig-neck" viewBox="0 0 120 120">
+      <!-- Neck side stretch -->
+      <circle cx="60" cy="28" r="10" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 38 L60 70 M60 50 L40 60 M60 50 L80 55 M60 70 L52 100 M60 70 L70 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M60 28 Q70 22 78 28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-shoulder" viewBox="0 0 120 120">
+      <circle cx="60" cy="26" r="9" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 35 L60 70 M30 50 Q60 38 90 50 M60 70 L50 100 M60 70 L70 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-childpose" viewBox="0 0 140 100">
+      <!-- Person kneeling forward -->
+      <path d="M20 80 Q40 78 70 78 Q100 78 120 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M30 78 Q45 50 70 50 Q95 50 110 78" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="30" cy="60" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M70 50 L115 35" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-catcow" viewBox="0 0 140 100">
+      <!-- Tabletop arched back -->
+      <path d="M25 80 L25 60 Q70 30 115 60 L115 80" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="25" cy="55" r="7" fill="none" stroke="currentColor" stroke-width="3"/>
+      <line x1="40" y1="65" x2="40" y2="80" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <line x1="100" y1="65" x2="100" y2="80" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-hip" viewBox="0 0 140 100">
+      <!-- Hip flexor lunge -->
+      <circle cx="100" cy="22" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M100 30 L100 60 L60 85 L20 85" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M100 60 L130 85" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M100 40 L85 55" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-hamstring" viewBox="0 0 140 100">
+      <!-- Seated forward fold -->
+      <circle cx="35" cy="35" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M35 43 Q50 55 70 55 L120 55" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M40 50 Q60 70 100 75" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <line x1="15" y1="85" x2="125" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+    </symbol>
+    <symbol id="fig-quad" viewBox="0 0 120 120">
+      <!-- Standing quad stretch -->
+      <circle cx="55" cy="22" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M55 30 L55 70 L55 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M55 70 L80 75 L70 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M55 40 L75 55" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M55 40 L40 30" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-calf" viewBox="0 0 140 100">
+      <!-- Calf stretch against wall -->
+      <line x1="120" y1="10" x2="120" y2="90" stroke="currentColor" stroke-width="4"/>
+      <circle cx="60" cy="25" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 33 L60 75 L20 90" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M60 75 L115 85" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M60 40 L110 35" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-cobra" viewBox="0 0 140 100">
+      <!-- Cobra / upward dog -->
+      <path d="M10 85 L130 85" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+      <path d="M30 85 Q70 75 100 50" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="105" cy="42" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <line x1="80" y1="68" x2="80" y2="85" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-twist" viewBox="0 0 120 120">
+      <!-- Seated spinal twist -->
+      <circle cx="60" cy="22" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M60 30 L60 70" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M30 50 Q60 38 90 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M60 70 L40 90 L80 90 L60 70" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M30 50 Q22 35 35 25" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-figure4" viewBox="0 0 140 100">
+      <!-- Lying figure-4 glute stretch -->
+      <line x1="10" y1="85" x2="130" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+      <circle cx="25" cy="75" r="7" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M25 75 L70 70 L70 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M70 55 L100 40 L95 70" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="fig-chest" viewBox="0 0 140 100">
+      <!-- Doorway chest stretch -->
+      <line x1="20" y1="10" x2="20" y2="90" stroke="currentColor" stroke-width="4"/>
+      <circle cx="70" cy="25" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M70 33 L70 70 L60 95 M70 70 L80 95" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M70 40 L30 25" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M70 40 L100 35" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-wrist" viewBox="0 0 140 100">
+      <!-- Wrist / forearm stretch -->
+      <circle cx="40" cy="28" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M40 36 L40 75 M40 75 L25 95 M40 75 L55 95" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M40 45 L100 45 L110 55 L100 65" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="fig-pigeon" viewBox="0 0 140 100">
+      <!-- Pigeon pose -->
+      <line x1="10" y1="85" x2="130" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+      <circle cx="30" cy="55" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M30 63 Q60 78 90 78 L125 78" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M50 70 Q70 60 95 78" fill="none" stroke="currentColor" stroke-width="3"/>
+    </symbol>
+    <symbol id="fig-side" viewBox="0 0 120 120">
+      <!-- Standing side bend -->
+      <circle cx="55" cy="22" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M55 30 Q70 55 60 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M55 40 Q75 25 90 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M55 40 L40 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fig-knees" viewBox="0 0 140 100">
+      <!-- Knees to chest -->
+      <line x1="10" y1="85" x2="130" y2="85" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+      <circle cx="25" cy="70" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M25 78 L80 78" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M80 78 L80 45 L55 45" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M55 55 L40 65" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+
+<section class="page-head"><div class="container reveal">
+  <span class="eyebrow">Pillar 02b · Mobility</span>
+  <h1>Stretches that keep you moving well.</h1>
+  <p class="lede">A small daily stretching habit pays back tenfold: better posture, fewer tweaks, easier mornings, and recovery that sticks. Browse the library, filter by area or time of day, or follow a ready-made set.</p>
+</div></section>
+
+<section><div class="container">
+
+  <div class="section-head reveal" style="text-align:left; margin-bottom:1.2rem;">
+    <span class="eyebrow">Ready-Made Routines</span>
+    <h2>Pick a set and press play.</h2>
+    <p style="margin:0;">Three to seven stretches, sequenced. The morning set wakes the body up; the others target specific moments in your day.</p>
+  </div>
+
+  <div class="routines">
+    <div class="routine glass featured-routine reveal">
+      <span class="badge">Morning · 5 min</span>
+      <h3>Good Morning Stretch</h3>
+      <p class="summary">A gentle wake-up sequence that lubricates the spine, opens the hips, and gets blood moving — do it next to the bed before your first coffee.</p>
+      <ol>
+        <li><strong>Cat–Cow</strong> — 8 slow rounds to wake the spine.</li>
+        <li><strong>Child's Pose</strong> — 30s to release the low back.</li>
+        <li><strong>Cobra</strong> — 20s × 2 to reverse a night of curling forward.</li>
+        <li><strong>Standing Side Bend</strong> — 20s each side to open the ribs.</li>
+        <li><strong>Standing Forward Fold</strong> (hamstring fold) — 30s to lengthen the posterior chain.</li>
+        <li><strong>Hip Flexor Lunge</strong> — 30s each side to undo sleep's hip flexion.</li>
+        <li><strong>Neck Side Stretch</strong> — 20s each side to finish.</li>
+      </ol>
+      <p class="total">Total: ~5 minutes · No equipment · Filter by <em>Morning</em> below to see each move.</p>
+    </div>
+
+    <div class="routine glass-soft reveal">
+      <span class="badge">Desk · 3 min</span>
+      <h3>Desk Reset</h3>
+      <p class="summary">Counters hours of typing and screen-staring. Do once mid-morning and once mid-afternoon.</p>
+      <ol>
+        <li><strong>Neck Side Stretch</strong> — 20s each side.</li>
+        <li><strong>Shoulder Rolls + Across-Body</strong> — 30s.</li>
+        <li><strong>Doorway Chest Opener</strong> — 30s.</li>
+        <li><strong>Wrist &amp; Forearm</strong> — 20s each side.</li>
+        <li><strong>Seated Spinal Twist</strong> — 20s each side.</li>
+      </ol>
+      <p class="total">Total: ~3 minutes · Do at your desk.</p>
+    </div>
+
+    <div class="routine glass-soft reveal">
+      <span class="badge">Post-Workout · 6 min</span>
+      <h3>Post-Workout Cooldown</h3>
+      <p class="summary">Static holds after training, while muscles are warm — the time most research suggests stretching actually improves range.</p>
+      <ol>
+        <li><strong>Standing Quad Stretch</strong> — 30s each side.</li>
+        <li><strong>Hamstring Forward Fold</strong> — 45s.</li>
+        <li><strong>Calf Wall Stretch</strong> — 30s each side.</li>
+        <li><strong>Hip Flexor Lunge</strong> — 30s each side.</li>
+        <li><strong>Pigeon Pose</strong> — 45s each side.</li>
+        <li><strong>Child's Pose</strong> — 45s to finish.</li>
+      </ol>
+      <p class="total">Total: ~6 minutes · After strength or cardio.</p>
+    </div>
+
+    <div class="routine glass-soft reveal">
+      <span class="badge">Bedtime · 4 min</span>
+      <h3>Bedtime Wind-Down</h3>
+      <p class="summary">Slow, floor-based holds that nudge the nervous system toward rest. Pairs well with the <a href="sleep.html">sleep guide</a>.</p>
+      <ol>
+        <li><strong>Child's Pose</strong> — 60s, breathe slowly.</li>
+        <li><strong>Figure-4 Glute Stretch</strong> — 45s each side, lying down.</li>
+        <li><strong>Knees-to-Chest</strong> — 30s.</li>
+        <li><strong>Seated Spinal Twist</strong> — 30s each side.</li>
+      </ol>
+      <p class="total">Total: ~4 minutes · On the bedroom floor or in bed.</p>
+    </div>
+  </div>
+
+  <div>
+    <img src="assets/images/stretching-exercises-chart.jpg"
+  </div>
+
+  <div class="section-head reveal" style="text-align:left; margin: 2.5rem 0 1rem;">
+    <span class="eyebrow">The Library</span>
+    <h2>Filter the full stretch library.</h2>
+    <p style="margin:0;">Search by name or tap a tag to narrow by body area or moment of the day.</p>
+  </div>
+
+  <div class="filter-bar glass-soft reveal" role="region" aria-label="Filter stretches">
+    <input type="search" class="search" id="stretch-search" placeholder="Search stretches…" aria-label="Search stretches" />
+    <button class="chip active" data-filter="all">All</button>
+    <button class="chip" data-filter="morning">Morning</button>
+    <button class="chip" data-filter="desk">Desk</button>
+    <button class="chip" data-filter="post-workout">Post-Workout</button>
+    <button class="chip" data-filter="bedtime">Bedtime</button>
+    <button class="chip" data-filter="neck">Neck &amp; Shoulders</button>
+    <button class="chip" data-filter="back">Back</button>
+    <button class="chip" data-filter="hips">Hips &amp; Glutes</button>
+    <button class="chip" data-filter="legs">Legs</button>
+    <button class="chip" data-filter="chest">Chest</button>
+  </div>
+
+  <div class="stretch-grid" id="stretch-grid">
+
+    <article class="stretch-card glass-soft reveal" data-tags="morning back desk bedtime" data-name="Cat-Cow">
+      <div class="figure"><svg><use href="#fig-catcow"/></svg></div>
+      <div class="body">
+        <h3>Cat–Cow</h3>
+        <p>On hands and knees, alternate arching and rounding the spine, syncing with the breath.</p>
+        <div class="duration">8 slow rounds · ~45 sec</div>
+        <div class="meta"><span>Morning</span><span>Back</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="morning back bedtime post-workout" data-name="Child's Pose">
+      <div class="figure"><svg><use href="#fig-childpose"/></svg></div>
+      <div class="body">
+        <h3>Child's Pose</h3>
+        <p>Knees wide, hips back to heels, arms long in front. A gentle full-spine release.</p>
+        <div class="duration">Hold 30–60 sec</div>
+        <div class="meta"><span>Back</span><span>Bedtime</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="morning back" data-name="Cobra">
+      <div class="figure"><svg><use href="#fig-cobra"/></svg></div>
+      <div class="body">
+        <h3>Cobra</h3>
+        <p>Lying face-down, press into the hands to lift the chest. Reverses the rounded posture of sleep and desk work.</p>
+        <div class="duration">Hold 20 sec × 2</div>
+        <div class="meta"><span>Morning</span><span>Back</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="morning back desk" data-name="Standing Side Bend">
+      <div class="figure"><svg><use href="#fig-side"/></svg></div>
+      <div class="body">
+        <h3>Standing Side Bend</h3>
+        <p>Reach one arm overhead and bend gently to the opposite side. Opens the ribs and lateral chain.</p>
+        <div class="duration">20 sec each side</div>
+        <div class="meta"><span>Morning</span><span>Back</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="morning post-workout legs" data-name="Hamstring Forward Fold">
+      <div class="figure"><svg><use href="#fig-hamstring"/></svg></div>
+      <div class="body">
+        <h3>Hamstring Forward Fold</h3>
+        <p>Hinge from the hips with a soft bend in the knees, letting the head hang. Lengthens hamstrings and low back.</p>
+        <div class="duration">Hold 30–45 sec</div>
+        <div class="meta"><span>Legs</span><span>Morning</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="morning post-workout hips" data-name="Hip Flexor Lunge">
+      <div class="figure"><svg><use href="#fig-hip"/></svg></div>
+      <div class="body">
+        <h3>Hip Flexor Lunge</h3>
+        <p>Half-kneeling, tuck the pelvis and shift weight gently forward. Counters hours of sitting.</p>
+        <div class="duration">30 sec each side</div>
+        <div class="meta"><span>Hips</span><span>Morning</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="morning desk neck" data-name="Neck Side Stretch">
+      <div class="figure"><svg><use href="#fig-neck"/></svg></div>
+      <div class="body">
+        <h3>Neck Side Stretch</h3>
+        <p>Ear gently toward shoulder, opposite hand reaching down. Relieves upper-trap tension.</p>
+        <div class="duration">20 sec each side</div>
+        <div class="meta"><span>Neck</span><span>Desk</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="desk neck" data-name="Shoulder Rolls & Cross-Body">
+      <div class="figure"><svg><use href="#fig-shoulder"/></svg></div>
+      <div class="body">
+        <h3>Shoulder Rolls &amp; Cross-Body</h3>
+        <p>Roll the shoulders back 10×, then pull one arm across the chest. Loosens deltoids and rhomboids.</p>
+        <div class="duration">30 sec total</div>
+        <div class="meta"><span>Neck</span><span>Desk</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="desk chest" data-name="Doorway Chest Opener">
+      <div class="figure"><svg><use href="#fig-chest"/></svg></div>
+      <div class="body">
+        <h3>Doorway Chest Opener</h3>
+        <p>Forearm on the doorframe, step gently through. The single best fix for hunched-over posture.</p>
+        <div class="duration">30 sec each side</div>
+        <div class="meta"><span>Chest</span><span>Desk</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="desk" data-name="Wrist & Forearm">
+      <div class="figure"><svg><use href="#fig-wrist"/></svg></div>
+      <div class="body">
+        <h3>Wrist &amp; Forearm</h3>
+        <p>Arm straight, pull the fingers back, then down. Underrated relief for typists and lifters alike.</p>
+        <div class="duration">20 sec each direction</div>
+        <div class="meta"><span>Desk</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="desk bedtime back" data-name="Seated Spinal Twist">
+      <div class="figure"><svg><use href="#fig-twist"/></svg></div>
+      <div class="body">
+        <h3>Seated Spinal Twist</h3>
+        <p>Cross one leg over, rotate the torso, breathe into the side. Decompresses the spine.</p>
+        <div class="duration">20–30 sec each side</div>
+        <div class="meta"><span>Back</span><span>Desk</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="post-workout legs" data-name="Standing Quad Stretch">
+      <div class="figure"><svg><use href="#fig-quad"/></svg></div>
+      <div class="body">
+        <h3>Standing Quad Stretch</h3>
+        <p>Pull the heel toward the glute, knees together. Hold a wall for balance if needed.</p>
+        <div class="duration">30 sec each side</div>
+        <div class="meta"><span>Legs</span><span>Post-Workout</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="post-workout legs" data-name="Calf Wall Stretch">
+      <div class="figure"><svg><use href="#fig-calf"/></svg></div>
+      <div class="body">
+        <h3>Calf Wall Stretch</h3>
+        <p>Hands on the wall, one leg back with a straight knee, heel pressed down.</p>
+        <div class="duration">30 sec each side</div>
+        <div class="meta"><span>Legs</span><span>Post-Workout</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="post-workout hips bedtime" data-name="Pigeon Pose">
+      <div class="figure"><svg><use href="#fig-pigeon"/></svg></div>
+      <div class="body">
+        <h3>Pigeon Pose</h3>
+        <p>Front shin angled across, back leg long. Deep release for the glute and outer hip.</p>
+        <div class="duration">45 sec each side</div>
+        <div class="meta"><span>Hips</span><span>Post-Workout</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="bedtime hips" data-name="Figure-4 Glute Stretch">
+      <div class="figure"><svg><use href="#fig-figure4"/></svg></div>
+      <div class="body">
+        <h3>Figure-4 Glute Stretch</h3>
+        <p>Lying on your back, ankle on opposite knee, pull the bottom leg in toward your chest.</p>
+        <div class="duration">45 sec each side</div>
+        <div class="meta"><span>Hips</span><span>Bedtime</span></div>
+      </div>
+    </article>
+
+    <article class="stretch-card glass-soft reveal" data-tags="bedtime back" data-name="Knees-to-Chest">
+      <div class="figure"><svg><use href="#fig-knees"/></svg></div>
+      <div class="body">
+        <h3>Knees-to-Chest</h3>
+        <p>Lying on your back, hug both knees gently to the chest. Decompresses the lumbar spine.</p>
+        <div class="duration">Hold 30 sec</div>
+        <div class="meta"><span>Back</span><span>Bedtime</span></div>
+      </div>
+    </article>
+
+  </div>
+
+  <p style="margin-top:2rem; text-align:center; color: var(--ink-muted); font-size:.9rem;">
+    Hold each stretch to the edge of comfort — never pain — and breathe slowly through your nose.
+    For programming, see the <a href="workout.html">workout guide</a>; for context on recovery, see <a href="sleep.html">sleep</a>.
+  </p>
+
+</div></section>
+
+</main>
+
+<footer><div class="container">
+  <div class="footer-grid">
+    <div><div class="brand" style="margin-bottom:.75rem;"><img src="assets/images/oak-logo.svg" alt="" width="32" height="32"><span>Oakwell</span></div><p style="font-size:.92rem;">A research-backed health and wellness hub.</p></div>
+    <div><h4>Daily Habits</h4><ul><li><a href="foods.html">Healthy Foods</a></li><li><a href="workout.html">Working Out</a></li><li><a href="stretches.html">Stretches</a></li><li><a href="water.html">Water</a></li><li><a href="sleep.html">Sleep</a></li></ul></div>
+    <div><h4>Environment</h4><ul><li><a href="hygiene.html">Hygiene</a></li><li><a href="air-quality.html">Air Quality</a></li><li><a href="carcinogens.html">Carcinogens</a></li></ul></div>
+    <div><h4>Care</h4><ul><li><a href="medical.html">Medical · Dental · Vision</a></li><li><a href="skincare.html">Skincare</a></li><li><a href="plans.html">Plans</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© Oakwell. Educational only — not medical advice.</p></div>
+</div></footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+  (function () {
+    const grid = document.getElementById('stretch-grid');
+    const cards = Array.from(grid.querySelectorAll('.stretch-card'));
+    const chips = Array.from(document.querySelectorAll('.filter-bar .chip'));
+    const search = document.getElementById('stretch-search');
+    let activeFilter = 'all';
+
+    function apply() {
+      const q = search.value.trim().toLowerCase();
+      let visible = 0;
+      cards.forEach(card => {
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const name = (card.dataset.name || '').toLowerCase();
+        const matchFilter = activeFilter === 'all' || tags.split(/\s+/).includes(activeFilter);
+        const matchSearch = !q || name.includes(q) || tags.includes(q);
+        const show = matchFilter && matchSearch;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      let empty = grid.querySelector('.empty-msg');
+      if (!visible) {
+        if (!empty) {
+          empty = document.createElement('p');
+          empty.className = 'empty-msg';
+          empty.textContent = 'No stretches match — try clearing the search or selecting "All".';
+          grid.appendChild(empty);
+        }
+      } else if (empty) {
+        empty.remove();
+      }
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeFilter = chip.dataset.filter;
+        apply();
+      });
+    });
+    search.addEventListener('input', apply);
+  })();
+</script>
+</body>
+</html>
